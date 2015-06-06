@@ -3,12 +3,11 @@ window.TrelloClone = {
   Collections: {},
   Views: {},
   Routers: {},
+  
   initialize: function() {
     console.log("Hello from Backbone!");
     new TrelloClone.Routers.Boards({
-
       $rootEl: $('#main')
-
     });
     Backbone.history.start();
   }
