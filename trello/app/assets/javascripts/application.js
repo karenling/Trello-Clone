@@ -15,7 +15,9 @@
 //= require jquery-ui/sortable
 //= require underscore
 //= require backbone
+//= require composite_view
 //= require bootstrap
+//= require jquery.serializejson
 //= require trello_clone
 //= require_tree ../templates
 //= require_tree ./utils

@@ -1,0 +1,19 @@
+
+
+<div class="board-show-title"><%= board.escape('title') %></div>
+<br>
+
+<% var boardCount = board.lists().length %>
+
+<% if (boardCount === 0) { %>
+  No lists yet!
+<% } else { %>
+  <div class="board-list-items"></div>
+<% } %>
+
+<div class="errors"></div>
+<div class="board-list-form"></div>
+
+<br>
+
+<a href="#boards">Back to Board Index</a>

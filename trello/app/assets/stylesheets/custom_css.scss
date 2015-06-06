@@ -1,0 +1,81 @@
+#main {
+  margin: 40px;
+}
+
+.errors {
+  color: red;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+}
+
+.individual-board {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+  padding: 20px;
+  margin: 20px;
+  float: left;
+}
+
+.board-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+.board-form {
+  clear: both;
+  display: block;
+  width: 400px;
+  float: left;
+}
+
+.board-list-items {
+  width: 100%;
+  padding: 10px;
+}
+
+.new-list {
+  display: block;
+  clear: both;
+  width: 400px;
+}
+
+.submit-button {
+  position: relative;
+  top: -5px;
+}
+.board-show-title {
+  font-weight: bold;
+  font-size: 40px;
+}
+.list-item {
+
+  background: #eeeeee;
+  width: 250px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  float: left;
+}
+
+.list-item-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.individual-card {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  clear: both;
+  margin: 20px 0;
+}
+
+/* Cards */
+.card-delete-button {
+  font-size: 10px;
+  padding: 3px 6px;
+}
