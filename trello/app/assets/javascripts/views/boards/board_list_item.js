@@ -5,14 +5,36 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
   initialize: function() {
 
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.cards(), "add", this.hideForm);
     this.listenTo(this.model.cards(), "add", this.addCardView);
     this.model.cards().comparator = "ord";
     this.model.cards().each(this.addCardView.bind(this));
+    this.addCardForm(this.model);
   },
 
   events: {
-    "click .delete": "deleteList"
+    "click .delete": "deleteList",
+    "click .show-button": "showForm",
+    "click .hide-button": "hideForm"
   },
+
+  hideForm: function() {
+    this.$el.find('.hide-button').hide();
+    this.$el.find('.card-form').hide();
+    this.$el.find('.show-button').show();
+  },
+
+  showForm: function() {
+    this.$el.find('.show-button').hide();
+    this.$el.find('.card-form').show();
+    this.$el.find('.hide-button').show();
+  },
+
+  addCardForm: function(list) {
+    var subview = new TrelloClone.Views.CardForm({ model: list, collection: this.model.cards() });
+    this.addSubview('.card-form', subview);
+  },
+
 
   addCardView: function(card) {
 
