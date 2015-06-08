@@ -6,12 +6,15 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.lists(), "sync", this.render);
     this.listenTo(this.model.lists(), "add", this.addListItemView);
     this.model.lists().each(this.addListItemView.bind(this));
-    this.addListFormView(this.model);
   },
 
   events: {
-    'update-sort': "updateSort"
+    'update-sort': "updateSort",
+    'click .board-delete-button': "deleteBoard",
+    'click .list-form-closed': "listFormOpen",
+    'click .close-list-form': 'listFormClose'
   },
+
 
   updateSort: function(event, model, position) {
     // model.set('ord', position);
@@ -20,8 +23,6 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
 
     /// keep these
       //  this.model.lists().remove(model);
-
-
       //  this.model.lists().each(function (model, index) {
       //      var ordinal = index;
       //      if (index >= position) {
@@ -37,19 +38,35 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     // keep1!
 
 
-      //  this.model.lists().fetch();
+    //  this.model.lists().fetch();
 
-      //  // to update ordinals on server:
-      //  var ids = this.model.lists().pluck('id');
-      //  $('#post-data').html('post ids to server: ' + ids.join(', '));
-       //
-      //  this.render();
+    //  // to update ordinals on server:
+    //  var ids = this.model.lists().pluck('id');
+    //  $('#post-data').html('post ids to server: ' + ids.join(', '));
+    //
+    //  this.render();
    },
 
-  addListFormView: function(board) {
-    var subview = new TrelloClone.Views.NewList({ model: board });
-    this.addSubview('.board-list-form', subview);
+  listFormOpen: function (event) {
+    $('.list-form-opened').show();
+    $('.list-form-closed').hide();
   },
+
+  listFormClose: function (event) {
+    $('.list-form-opened').hide();
+    $('.list-form-closed').show();
+  },
+
+  deleteBoard: function (event) {
+    this.remove();
+    this.model.destroy({
+      success: function() {
+
+        Backbone.history.navigate("#boards", { trigger: true });
+      }
+    });
+  },
+
 
   addListItemView: function(list) {
 
@@ -62,8 +79,17 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     var content = this.template({
       board: this.model
     });
+
     this.$el.html(content);
     this.attachSubviews();
+
+    var newListView = new TrelloClone.Views.NewList({ model: this.model });
+
+    $('.list-form-opened').html(newListView.render().$el);
+    $('.list-form-closed').html("Add a list...");
+    // this.listFormClose();
+    this.listFormOpen();
+
     return this;
   }
 });

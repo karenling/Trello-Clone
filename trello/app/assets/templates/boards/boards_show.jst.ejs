@@ -10,7 +10,16 @@
   });
 </script>
 
-<div class="board-show-title"><%= board.escape('title') %></div>
+<style type="text/css">
+  body {
+    background: rgb(0, 121, 191);
+  }
+</style>
+
+<div class="board-show-title">
+  <%= board.escape('title') %>
+  <button class="board-delete-button btn btn-danger">x</button>
+</div>
 <br>
 
 <% var boardCount = board.lists().length %>
@@ -18,11 +27,18 @@
 <% if (boardCount === 0) { %>
   No lists yet!
 <% } else { %>
-  <ul class="board-list-items"></ul>
+  <div class="horizontal-boards">
+    <ul class="board-list-items"></ul>
+    <div class="board-list-form">
+      <div class="list-form-opened"></div>
+      <div class="list-form-closed"></div>
+    </div>
+  </div>
 <% } %>
 
+
 <div class="errors"></div>
-<div class="board-list-form"></div>
+
 
 <br>
 
