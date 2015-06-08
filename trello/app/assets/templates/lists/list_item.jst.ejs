@@ -1,3 +1,10 @@
+<script>
+$(function() {
+  $( ".cards" ).sortable();
+  $( ".cards" ).disableSelection();
+});
+</script>
+
 <div class="list-item-title">
   <%= listItem.escape('title') %> <button class="list-delete-button delete btn btn-danger pull-right">X</button>
 </div>
@@ -6,7 +13,7 @@
 
 
 
-<div class="cards"></div>
+<ul class="cards"></ul>
 
 <div class="card-form-holder">
   <div class="show-button">Add a Card...</div>

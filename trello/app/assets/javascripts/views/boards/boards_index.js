@@ -3,7 +3,6 @@ TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
   template: JST['boards/index'],
 
   initialize: function(options) {
-
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, 'add', this.addBoardItemView);
     this.collection.each(this.addBoardItemView.bind(this));
@@ -12,6 +11,7 @@ TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
 
 
   addBoardItemView: function(board) {
+
     var subview = new TrelloClone.Views.BoardsIndexItem({ model: board });
     this.addSubview('.board-items', subview);
   },

@@ -15,8 +15,13 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
   events: {
     "click .delete": "deleteList",
     "click .show-button": "showForm",
-    "click .hide-button": "hideForm"
+    "click .hide-button": "hideForm",
+    "drop": "drop"
   },
+
+  drop: function(event, index) {
+     this.$el.trigger('update-sort', [this.model, index]);
+ },
 
   hideForm: function() {
     this.$el.find('.hide-button').hide();

@@ -9,12 +9,46 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     this.addListFormView(this.model);
   },
 
+  events: {
+    'update-sort': "updateSort"
+  },
+
+  updateSort: function(event, model, position) {
+    // model.set('ord', position);
+    // model.save();
+
+
+       this.model.lists().remove(model);
+
+
+       this.model.lists().each(function (model, index) {
+           var ordinal = index;
+           if (index >= position) {
+               ordinal += 1;
+           }
+           model.set('ord', ordinal);
+           model.save();
+       });
+
+       model.set('ord', position);
+       model.save();
+       this.model.lists().add(model);
+      //  this.model.lists().fetch();
+
+      //  // to update ordinals on server:
+      //  var ids = this.model.lists().pluck('id');
+      //  $('#post-data').html('post ids to server: ' + ids.join(', '));
+       //
+      //  this.render();
+   },
+
   addListFormView: function(board) {
     var subview = new TrelloClone.Views.NewList({ model: board });
     this.addSubview('.board-list-form', subview);
   },
 
   addListItemView: function(list) {
+
     var subview = new TrelloClone.Views.BoardListItem({ model: list });
     this.addSubview('.board-list-items', subview);
   },

@@ -1,4 +1,14 @@
+<script>
+  $(function() {
+    $('.board-list-items').sortable({
+      stop: function(event, ui) {
+           ui.item.trigger('drop', ui.item.index());
+       }
+    });
+    $('.board-list-items').disableSelection();
 
+  });
+</script>
 
 <div class="board-show-title"><%= board.escape('title') %></div>
 <br>
@@ -8,7 +18,7 @@
 <% if (boardCount === 0) { %>
   No lists yet!
 <% } else { %>
-  <div class="board-list-items"></div>
+  <ul class="board-list-items"></ul>
 <% } %>
 
 <div class="errors"></div>
