@@ -1,11 +1,64 @@
 body {
-  font-family: "Helvetica Neue", sans-serif;
+  font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+  line-height: 18px;
+  color: #4d4d4d;
 }
 
 #main {
   padding: 40px;
   // width: 90%;
 }
+
+.greyed {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+.confirm-delete {
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -75px;
+  margin-left: -187px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid #aaa;
+  height: 150px;
+  width: 374px;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+
+.board-delete-confirm, .board-delete-cancel {
+  background: #61bd4f;
+  border: 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  font-weight: bold;
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-top: 20px;
+
+}
+.board-delete-confirm {
+  background: #61bd4f;
+}
+.board-delete-cancel {
+  background: #eeeeee;
+}
+.board-delete-confirm:hover {
+  background: #5aac44;
+}
+.board-delete-cancel.hover {
+  background: #cccccc;
+}
+
 
 h3 {
   color: #4d4d4d;
@@ -27,8 +80,16 @@ h3 {
   padding: 20px;
   margin: 20px;
   float: left;
+  position: relative;
 }
 
+.board-index-delete-button {
+  background: transparent;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 20px;
+}
 .board-form-container .form-closed {
   color: #8c8c8c;
   background: #d6dadc;
@@ -134,13 +195,14 @@ h3 {
   font-weight: bold;
   font-size: 18px;
 }
+
 .list-item {
   vertical-align: top;
   display: inline-block;
   background: #e2e4e6;
   width: 270px;
   margin: 0 10px;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
   // float: left;
 }
@@ -157,6 +219,7 @@ h3 {
 .list-item-title {
   font-weight: bold;
   font-size: 16px;
+  color: #4d4d4d;
 }
 .list-form-closed {
   background: #006ba9;
@@ -187,21 +250,36 @@ h3 {
   margin: 5px;
   width: 260px;
 }
+
 .list-delete-button, .card-delete-button {
   font-size: 10px;
   padding: 3px 7px;
  }
 
+.card-delete-button {
+  margin-right: -3px;
+}
  .board-delete-button {
    font-size: 16px;
    padding: 3px 11px 5px 11px;
  }
 .individual-card {
+  white-space: normal;
   background: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 3px;
   clear: both;
-  margin: 20px 0;
+  margin: 10px 0;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.10);
+}
+.card-sort-placeholder {
+  background: rgba(0, 0, 0, 0.10);
+  padding: 10px;
+  margin: 10px 0px;
+  // height: 100px;
+  // width: 270px;
+  border-radius: 3px;
+  display: inline-block;
 }
 
 .dragged {
@@ -215,6 +293,8 @@ h3 {
 .card-form {
   padding-top: 15px;
 }
+
+
 .show-button {
   color: #8c8c8c;
 }
@@ -231,7 +311,6 @@ h3 {
   margin: 15px 0;
   width: 100%;
   border: 0;
-  box-shadow: 0 1px 0 #4d4d4d;
   padding: 10px 15px;
 }
 .card-submit:hover {

@@ -10,7 +10,16 @@ $(function() {
   cardIds = '#'.concat(cardIds.join(", #"));
 
   $(cardIds).sortable({
-  connectWith: ".cards"
+  forcePlaceholderSize: true,
+  placeholder: "card-sort-placeholder",
+  connectWith: ".cards",
+  start: function(event, ul) {
+    ul.item.addClass('dragged');
+  },
+
+  stop: function(event, ul) {
+    ul.item.removeClass('dragged');
+  }
 }).disableSelection();
 
 
