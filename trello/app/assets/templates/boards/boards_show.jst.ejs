@@ -1,8 +1,15 @@
 <script>
   $(function() {
     $('.board-list-items').sortable({
+      forcePlaceholderSize: true,
+      placeholder: "list-sort-placeholder",
+      start: function(event, ul) {
+        ul.item.addClass('dragged');
+      },
+
       stop: function(event, ul) {
-           ul.item.trigger('drop', ul.item.index()); // takes the one item that has moved
+        ul.item.removeClass('dragged');
+        ul.item.trigger('drop', ul.item.index()); // takes the one item that has moved
        }
     });
     $('.board-list-items').disableSelection();

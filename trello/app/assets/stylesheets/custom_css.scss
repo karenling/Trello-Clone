@@ -145,6 +145,15 @@ h3 {
   // float: left;
 }
 
+.list-sort-placeholder {
+  background: rgba(0, 0, 0, 0.10);
+  padding: 20px;
+  margin: 0 10px;
+  // height: 100px;
+  // width: 270px;
+  border-radius: 5px;
+  display: inline-block;
+}
 .list-item-title {
   font-weight: bold;
   font-size: 16px;
@@ -195,8 +204,17 @@ h3 {
   margin: 20px 0;
 }
 
+.dragged {
+  -ms-transform: rotate(5deg); /* IE 9 */
+  -webkit-transform: rotate(5deg); /* Chrome, Safari, Opera */
+  transform: rotate(5deg);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
 /* Cards */
 
+.card-form {
+  padding-top: 15px;
+}
 .show-button {
   color: #8c8c8c;
 }

@@ -1,11 +1,25 @@
 <script>
 $(function() {
-  $( ".cards" ).sortable({
-    stop: function(event, ul) {
-      ul.item.trigger('dropCard', ul.item.index());
-    }
+  var cardIds = [];
+  $('.cards').each(function(idx, card) {
+    var newId = "cards-"+ idx
+    $(card).attr("id", newId);
+    cardIds.push(newId);
   });
-  $( ".cards" ).disableSelection();
+
+  cardIds = '#'.concat(cardIds.join(", #"));
+
+  $(cardIds).sortable({
+  connectWith: ".cards"
+}).disableSelection();
+
+
+  // $( ".cards" ).sortable({
+  //   stop: function(event, ul) {
+  //     ul.item.trigger('dropCard', ul.item.index());
+  //   }
+  // });
+  // $( ".cards" ).disableSelection();
 });
 </script>
 
