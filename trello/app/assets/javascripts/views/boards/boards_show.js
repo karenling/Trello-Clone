@@ -9,10 +9,10 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'update-sort': "updateSort",
     'click .board-delete-button': "deleteBoard",
     'click .list-form-closed': "listFormOpen",
-    'click .close-list-form': 'listFormClose'
+    'click .close-list-form': 'listFormClose',
+    'update-sort': "updateSort"
   },
 
 
