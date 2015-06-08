@@ -16,11 +16,29 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
     "click .delete": "deleteList",
     "click .show-button": "showForm",
     "click .hide-button": "hideForm",
-    "drop": "drop"
+    "drop": "drop",
+    "updateSortCards": "updateSortCards"
+
   },
 
-  drop: function(event, index) {
+  updateSortCards: function(event, model, position) {
+    this.model.cards().remove(model);
+    this.model.cards().each(function (model, index) {
+      if (index >= position) {
+        model.set('ord', index + 1);
+        model.save;
+      }
+    })
+
+    model.set('ord', position);
+    model.save();
+
+    this.model.cards().add(model, { silent: true });
+  },
+
+  drop: function(event, index) { // we take the passed in ul index
      this.$el.trigger('update-sort', [this.model, index]);
+    //  debugger;
  },
 
   hideForm: function() {

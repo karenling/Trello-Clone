@@ -3,7 +3,7 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.model.lists(), "sync", this.render);
+    // this.listenTo(this.model.lists(), "sync", this.render);
     this.listenTo(this.model.lists(), "add", this.addListItemView);
     this.model.lists().each(this.addListItemView.bind(this));
   },
@@ -21,6 +21,22 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     // model.save();
 
 
+
+
+    this.model.lists().remove(model); // remove the moved model from the collection
+    this.model.lists().each(function (model, index) { // iterate through the changed collection
+        if (index >= position) { // if we find a model in the changed collection that has an index greater than the ul index. this way we don't update anything that isn't changed.
+          model.set('ord', index + 1); // we will update his ord to be one more than before
+          model.save();
+        }
+    });
+
+    model.set('ord', position); // now we can set the moved model's position
+    model.save();
+    this.model.lists().add(model, { silent: true }); // add it back to the collection
+    // this.model.lists().sort();
+
+
     /// keep these
       //  this.model.lists().remove(model);
       //  this.model.lists().each(function (model, index) {
@@ -34,7 +50,8 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
        //
       //  model.set('ord', position);
       //  model.save();
-      //  this.model.lists().add(model);
+      //  this.model.lists().add(model, { silent: true });
+      //  this.model.lists().sort();
     // keep1!
 
 
@@ -44,6 +61,7 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     //  var ids = this.model.lists().pluck('id');
     //  $('#post-data').html('post ids to server: ' + ids.join(', '));
     //
+    // debugger
     //  this.render();
    },
 
@@ -75,7 +93,7 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    this.model.lists().comparator = "ord";
+    // this.model.lists().comparator = "ord";
     var content = this.template({
       board: this.model
     });

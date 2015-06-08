@@ -1,6 +1,10 @@
 <script>
 $(function() {
-  $( ".cards" ).sortable();
+  $( ".cards" ).sortable({
+    stop: function(event, ul) {
+      ul.item.trigger('dropCard', ul.item.index());
+    }
+  });
   $( ".cards" ).disableSelection();
 });
 </script>

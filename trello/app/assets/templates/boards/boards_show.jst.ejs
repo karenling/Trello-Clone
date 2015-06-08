@@ -1,8 +1,8 @@
 <script>
   $(function() {
     $('.board-list-items').sortable({
-      stop: function(event, ui) {
-           ui.item.trigger('drop', ui.item.index());
+      stop: function(event, ul) {
+           ul.item.trigger('drop', ul.item.index()); // takes the one item that has moved
        }
     });
     $('.board-list-items').disableSelection();

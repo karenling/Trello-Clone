@@ -9,7 +9,13 @@ TrelloClone.Views.Card = Backbone.View.extend({
   events: {
     "mouseover": "showDelete",
     "mouseout": "hideDelete",
-    "click .card-delete-button": "deleteCard"
+    "click .card-delete-button": "deleteCard",
+    "dropCard": "dropCard"
+  },
+
+
+  dropCard: function(event, index) {
+    this.$el.trigger('updateSortCards', [this.model, index]);
   },
 
   render: function() {
