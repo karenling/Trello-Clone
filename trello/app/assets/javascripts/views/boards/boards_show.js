@@ -87,8 +87,8 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
 
     $('.list-form-opened').html(newListView.render().$el);
     $('.list-form-closed').html("Add a list...");
-    // this.listFormClose();
-    this.listFormOpen();
+    this.listFormClose();
+    // this.listFormOpen();
 
     return this;
   }
