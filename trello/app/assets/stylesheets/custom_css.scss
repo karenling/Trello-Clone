@@ -179,11 +179,25 @@ h3 {
   background: #5aac44;
 }
 
+.submit-button-list {
+  background: #61bd4f;
+  border: 0;
+  box-shadow: 0 1px 0 #4d4d4d;
+  padding: 5px 15px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+.submit-button-list:hover {
+  background: #5aac44;
+}
+
+
+
 .close-list-form {
   font-size: 30px;
   color: #888888;
   position: relative;
-  top: -45px;
+  top: -27px;
   left: 80px;
   font-weight: 200;
   float: left;

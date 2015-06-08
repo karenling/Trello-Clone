@@ -3,6 +3,7 @@ TrelloClone.Views.Card = Backbone.View.extend({
   className: "individual-card",
 
   initialize: function() {
+    this.$el.data("card-id", this.model.id);
     this.listenTo(this.model, "sync", this.render);
   },
 
@@ -10,12 +11,12 @@ TrelloClone.Views.Card = Backbone.View.extend({
     "mouseover": "showDelete",
     "mouseout": "hideDelete",
     "click .card-delete-button": "deleteCard",
-    "dropCard": "dropCard"
+    "dropCard": "dropCard",
   },
 
 
-  dropCard: function(event, index) {
-    this.$el.trigger('updateSortCards', [this.model, index]);
+  dropCard: function(event, index, newListId) {
+    this.$el.trigger('updateSortCards', [this.model, index, newListId]); // now that you know the card model and the new position
   },
 
   render: function() {

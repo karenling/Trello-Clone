@@ -21,19 +21,53 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
 
   },
 
-  updateSortCards: function(event, model, position) {
-    this.model.cards().remove(model);
-    this.model.cards().each(function (model, index) {
+  updateSortCards: function(event, model, position, newListId) {
+    // alert(model.get("description"));
+    var originalListID = model.get("list_id")
+    // alert(originalListID);
+    console.log(originalListID);
+
+    var originalList = this.collection.get(originalListID);
+    // alert(newListId);
+
+    originalList.cards().remove(model);
+    originalList.cards().each(function (model, index) {
+      model.set('ord', index);
+      model.save();
+    });
+
+    var newList = this.collection.get(newListId);
+
+    newList.cards().each(function (model, index) {
       if (index >= position) {
         model.set('ord', index + 1);
-        model.save;
+        model.save();
       }
-    })
+    });
 
+    // model.set("description", " is something");
+    model.set("list_id", newListId);
     model.set('ord', position);
     model.save();
 
-    this.model.cards().add(model, { silent: true });
+    newList.cards().add(model, { silent: true });
+
+    // debugger;
+
+    // originalL
+    //
+    // this.model.cards().remove(model);
+    // this.model.cards().each(function (model, index) {
+    //   if (index >= position) {
+    //     model.set('ord', index + 1);
+    //     model.save;
+    //   }
+    // })
+    //
+    // model.set('ord', position);
+    // model.save();
+    //
+    // this.model.cards().add(model, { silent: true });
   },
 
   drop: function(event, index) { // we take the passed in ul index

@@ -31,17 +31,13 @@
 
 <% var boardCount = board.lists().length %>
 
-<% if (boardCount === 0) { %>
-  No lists yet!
-<% } else { %>
-  <div class="horizontal-boards">
-    <ul class="board-list-items"></ul>
-    <div class="board-list-form">
-      <div class="list-form-opened"></div>
-      <div class="list-form-closed"></div>
-    </div>
+<div class="horizontal-boards">
+  <ul class="board-list-items"></ul>
+  <div class="board-list-form">
+    <div class="list-form-opened"></div>
+    <div class="list-form-closed"></div>
   </div>
-<% } %>
+</div>
 
 
 <div class="errors"></div>

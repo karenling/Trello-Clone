@@ -10,15 +10,23 @@ $(function() {
   cardIds = '#'.concat(cardIds.join(", #"));
 
   $(cardIds).sortable({
-  forcePlaceholderSize: true,
-  placeholder: "card-sort-placeholder",
-  connectWith: ".cards",
-  start: function(event, ul) {
-    ul.item.addClass('dragged');
-  },
+    forcePlaceholderSize: true,
+    placeholder: "card-sort-placeholder",
+    connectWith: ".cards",
 
-  stop: function(event, ul) {
-    ul.item.removeClass('dragged');
+    receive: function (event, ui) { // This event is triggered when an item from a connected sortable list has been dropped into another list. The latter is the event target.
+      var receivingListID = $(event.target).data('cards-id');
+      // console.log(event.currentTarget);
+      ui.item.trigger("dropCard", [ui.item.index(), receivingListID]);
+
+    },
+
+    start: function (event, ui) {
+      ui.item.addClass('dragged');
+    },
+
+    stop: function (event, ui) {
+      ui.item.removeClass('dragged');
   }
 }).disableSelection();
 
@@ -40,7 +48,7 @@ $(function() {
 
 
 
-<ul class="cards"></ul>
+<ul class="cards" data-cards-id="<%= listItem.id %>"></ul>
 
 <div class="card-form-holder">
   <div class="show-button">Add a Card...</div>

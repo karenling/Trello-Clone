@@ -7,7 +7,11 @@ TrelloClone.Views.DeleteModal = Backbone.View.extend({
   },
 
   confirmDeleteBoard: function (event) {
-    this.model.destroy();
+    this.model.destroy({
+      success: function () {
+        Backbone.history.navigate("#", { trigger: true });
+      }
+    });
     this.remove();
   },
 

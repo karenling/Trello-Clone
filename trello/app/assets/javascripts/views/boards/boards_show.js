@@ -76,19 +76,17 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
   },
 
   deleteBoard: function (event) {
-    this.remove();
-    this.model.destroy({
-      success: function() {
 
-        Backbone.history.navigate("#boards", { trigger: true });
-      }
-    });
+    event.preventDefault();
+    var deleteView = new TrelloClone.Views.DeleteModal({ model: this.model });
+    $('body').append(deleteView.render().$el);
+    return this;
   },
 
 
   addListItemView: function(list) {
 
-    var subview = new TrelloClone.Views.BoardListItem({ model: list });
+    var subview = new TrelloClone.Views.BoardListItem({ collection: this.model.lists(), model: list });
     this.addSubview('.board-list-items', subview);
   },
 
