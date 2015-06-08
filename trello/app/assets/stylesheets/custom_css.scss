@@ -33,7 +33,11 @@
 }
 
 .board-list-items {
-  width: 100%;
+  // width: 100%;
+
+  white-space: nowrap;
+  overflow: auto;
+
   padding: 10px;
 }
 
@@ -52,13 +56,14 @@
   font-size: 40px;
 }
 .list-item {
-
+  vertical-align: top;
+  display: inline-block;
   background: #eeeeee;
   width: 250px;
   margin: 10px;
   padding: 20px;
   border-radius: 5px;
-  float: left;
+  // float: left;
 }
 
 .list-item-title {

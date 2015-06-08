@@ -24,6 +24,7 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
  },
 
   hideForm: function() {
+    this.$el.find('#card-description').attr("placeholder", "");
     this.$el.find('.hide-button').hide();
     this.$el.find('.card-form').hide();
     this.$el.find('.show-button').show();

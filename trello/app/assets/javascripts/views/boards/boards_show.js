@@ -18,21 +18,25 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     // model.save();
 
 
-       this.model.lists().remove(model);
+    /// keep these
+      //  this.model.lists().remove(model);
 
 
-       this.model.lists().each(function (model, index) {
-           var ordinal = index;
-           if (index >= position) {
-               ordinal += 1;
-           }
-           model.set('ord', ordinal);
-           model.save();
-       });
+      //  this.model.lists().each(function (model, index) {
+      //      var ordinal = index;
+      //      if (index >= position) {
+      //          ordinal += 1;
+      //      }
+      //      model.set('ord', ordinal);
+      //      model.save();
+      //  });
+       //
+      //  model.set('ord', position);
+      //  model.save();
+      //  this.model.lists().add(model);
+    // keep1!
 
-       model.set('ord', position);
-       model.save();
-       this.model.lists().add(model);
+
       //  this.model.lists().fetch();
 
       //  // to update ordinals on server:

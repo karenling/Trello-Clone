@@ -6,26 +6,37 @@ TrelloClone.Views.CardForm = Backbone.View.extend({
   },
 
   render: function () {
+
     var content = this.template({ list: this.model });
     this.$el.html(content);
     return this;
   },
 
   createCard: function (event) {
-    var $form = $(event.currentTarget);
     event.preventDefault();
+    if ($(event.currentTarget).find('#card-description').val() === "") {
+      $(event.currentTarget).find('#card-description').attr("placeholder", "Cannot be empty.");
+      console.log("lejwalkfew");
+    } else {
+
+    var $form = $(event.currentTarget);
+
     var attrs = $(event.currentTarget).serializeJSON();
     var card = new TrelloClone.Models.Card();
-    console.log($form);
-    card.save(attrs, {
-      success: function() {
-        this.collection.add(card);
-        $form.find('#card-description').val("");
-      }.bind(this),
-      errors: function(models, response) {
-        $('.card-errors').html(response.responseJSON[0]);
-      }
-    });
+
+
+      card.save(attrs, {
+        success: function() {
+          this.collection.add(card);
+          $form.find('#card-description').val("");
+        }.bind(this),
+        error: function(models, response) {
+          $('.card-errors').html(response.responseJSON[0]);
+          console.log(card.validationError());
+
+        }
+      });
+    }
 
   }
 });
