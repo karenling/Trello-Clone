@@ -19,7 +19,7 @@ TrelloClone.Views.NewList = Backbone.View.extend({
   submitForm: function(event) {
     event.preventDefault();
     var attrs = $(event.currentTarget).serializeJSON();
-    var newList = new TrelloClone.Models.BoardList();
+    var newList = new TrelloClone.Models.List();
 
     newList.save(attrs, {
       success: function() {

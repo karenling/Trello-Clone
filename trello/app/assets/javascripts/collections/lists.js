@@ -1,5 +1,5 @@
-TrelloClone.Collections.BoardLists = Backbone.Collection.extend({
-  model: TrelloClone.Models.BoardList,
+TrelloClone.Collections.Lists = Backbone.Collection.extend({
+  model: TrelloClone.Models.List,
   url: '/api/lists',
 
   getOrFetch: function(id) {
