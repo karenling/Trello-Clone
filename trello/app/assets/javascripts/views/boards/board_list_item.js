@@ -22,15 +22,13 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
   },
 
   updateSortCards: function(event, model, position, newListId) {
-    // alert(model.get("description"));
     var originalListID = model.get("list_id")
-    // alert(originalListID);
-    console.log(originalListID);
+
 
     var originalList = this.collection.get(originalListID);
-    // alert(newListId);
 
     originalList.cards().remove(model);
+
     originalList.cards().each(function (model, index) {
       model.set('ord', index);
       model.save();
@@ -39,10 +37,12 @@ TrelloClone.Views.BoardListItem = Backbone.CompositeView.extend({
     var newList = this.collection.get(newListId);
 
     newList.cards().each(function (model, index) {
+      var ordinal = index;
       if (index >= position) {
-        model.set('ord', index + 1);
-        model.save();
+        ordinal += 1;
       }
+      model.set('ord', ordinal);
+      model.save();
     });
 
     // model.set("description", " is something");

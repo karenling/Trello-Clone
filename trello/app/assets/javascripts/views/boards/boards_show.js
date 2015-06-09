@@ -12,29 +12,53 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     'click .board-delete-button': "deleteBoard",
     'click .list-form-closed': "listFormOpen",
     'click .close-list-form': 'listFormClose',
-    'update-sort': "updateSort"
+    'update-sort': "updateSort",
+    "click .addMember": "addMember"
   },
 
 
+  addMember: function() {
+    var membershipForm = new TrelloClone.Views.BoardMembershipsForm();
+    this.$el.html(membershipForm.render().$el);
+    return this;
+  },
   updateSort: function(event, model, position) {
     // model.set('ord', position);
     // model.save();
 
 
 
+        // this.model.lists().remove(model); // remove the moved model from the collection
+        // this.model.lists().each(function (model, index) { // iterate through the changed collection
+        //     if (index >= position) { // if we find a model in the changed collection that has an index greater than the ul index. this way we don't update anything that isn't changed.
+        //
+        //       model.set('ord', index+1); // we will update his ord to be one more than before
+        //       model.save();
+        //     }
+        // });
+        //
+        // model.set('ord', position); // now we can set the moved model's position
+        // model.save();
+        // this.model.lists().add(model, { silent: true }); // add it back to the collection
+        // // this.model.lists().sort();
+
+
+
 
     this.model.lists().remove(model); // remove the moved model from the collection
     this.model.lists().each(function (model, index) { // iterate through the changed collection
+        var ordinal = index;
         if (index >= position) { // if we find a model in the changed collection that has an index greater than the ul index. this way we don't update anything that isn't changed.
-          model.set('ord', index + 1); // we will update his ord to be one more than before
-          model.save();
+          ordinal += 1;
         }
+        model.set('ord', ordinal); // we will update his ord to be one more than before
+        model.save();
     });
 
     model.set('ord', position); // now we can set the moved model's position
     model.save();
     this.model.lists().add(model, { silent: true }); // add it back to the collection
-    // this.model.lists().sort();
+    this.model.lists().sort();
 
 
     /// keep these

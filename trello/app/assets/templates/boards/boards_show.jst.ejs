@@ -8,6 +8,7 @@
       },
 
       stop: function(event, ul) {
+        console.log('stop ');
         ul.item.removeClass('dragged');
         ul.item.trigger('drop', ul.item.index()); // takes the one item that has moved
        }
@@ -31,6 +32,7 @@
 
 <% var boardCount = board.lists().length %>
 
+<div class="addMember">leajflewjlk add member</div>
 <div class="horizontal-boards">
   <ul class="board-list-items"></ul>
   <div class="board-list-form">
