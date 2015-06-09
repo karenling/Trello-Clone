@@ -9,13 +9,22 @@ module Api
     end
 
     def create
-      @board_membership = BoardMembership.new(board_mem_params);
+        user = User.find_by(email: params[:board_membership][:email])
 
-      if @board_membership.save
-        render json: @board_membership
-      else
-        render json: @board_membership.errors.full_messages, status: :unprocessable_entity
-      end
+        if user
+          @board_membership = BoardMembership.new(user_id: user.id, board_id: params[:board_membership][:board_id]);
+
+          if @board_membership.save
+            render json: @board_membership
+          else
+            render json: @board_membership.errors.full_messages, status: :unprocessable_entity
+          end
+        else
+          render json: "User doesn't exist"
+        end
+
+
+
     end
 
 

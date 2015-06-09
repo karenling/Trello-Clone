@@ -13,38 +13,21 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     'click .list-form-closed': "listFormOpen",
     'click .close-list-form': 'listFormClose',
     'update-sort': "updateSort",
-    "click .addMember": "addMember"
+    "click .add-member-closed": "openAddMemberForm",
+    "click .close-member-form": "closeAddMemberForm",
   },
 
 
-  addMember: function() {
-    var membershipForm = new TrelloClone.Views.BoardMembershipsForm();
-    this.$el.html(membershipForm.render().$el);
-    return this;
+  openAddMemberForm: function() {
+    $('.add-member-opened').show();
+    $('.add-member-closed').hide();
+  },
+  closeAddMemberForm: function() {
+    $('.add-member-opened').hide();
+    $('.add-member-closed').show();
+
   },
   updateSort: function(event, model, position) {
-    // model.set('ord', position);
-    // model.save();
-
-
-
-        // this.model.lists().remove(model); // remove the moved model from the collection
-        // this.model.lists().each(function (model, index) { // iterate through the changed collection
-        //     if (index >= position) { // if we find a model in the changed collection that has an index greater than the ul index. this way we don't update anything that isn't changed.
-        //
-        //       model.set('ord', index+1); // we will update his ord to be one more than before
-        //       model.save();
-        //     }
-        // });
-        //
-        // model.set('ord', position); // now we can set the moved model's position
-        // model.save();
-        // this.model.lists().add(model, { silent: true }); // add it back to the collection
-        // // this.model.lists().sort();
-
-
-
-
     this.model.lists().remove(model); // remove the moved model from the collection
     this.model.lists().each(function (model, index) { // iterate through the changed collection
         var ordinal = index;
@@ -60,33 +43,6 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     this.model.lists().add(model, { silent: true }); // add it back to the collection
     this.model.lists().sort();
 
-
-    /// keep these
-      //  this.model.lists().remove(model);
-      //  this.model.lists().each(function (model, index) {
-      //      var ordinal = index;
-      //      if (index >= position) {
-      //          ordinal += 1;
-      //      }
-      //      model.set('ord', ordinal);
-      //      model.save();
-      //  });
-       //
-      //  model.set('ord', position);
-      //  model.save();
-      //  this.model.lists().add(model, { silent: true });
-      //  this.model.lists().sort();
-    // keep1!
-
-
-    //  this.model.lists().fetch();
-
-    //  // to update ordinals on server:
-    //  var ids = this.model.lists().pluck('id');
-    //  $('#post-data').html('post ids to server: ' + ids.join(', '));
-    //
-    // debugger
-    //  this.render();
    },
 
   listFormOpen: function (event) {
@@ -129,6 +85,11 @@ TrelloClone.Views.BoardsShow = Backbone.CompositeView.extend({
     $('.list-form-closed').html("Add a list...");
     this.listFormClose();
     // this.listFormOpen();
+
+    var membershipForm = new TrelloClone.Views.BoardMembershipsForm({ model: this.model });
+    $('.add-member-opened').html(membershipForm.render().$el);
+    $('.add-member-closed').show();
+    $('.add-member-opened').hide();
 
     return this;
   }

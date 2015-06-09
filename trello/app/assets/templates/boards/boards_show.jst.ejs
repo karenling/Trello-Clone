@@ -27,12 +27,14 @@
 <div class="board-show-title">
   <%= board.escape('title') %>
   <button class="board-delete-button btn btn-danger">x</button>
+  <div class="add-member-closed">Add Member...</div>
+  <div class="add-member-opened"></div>
 </div>
 <br>
 
 <% var boardCount = board.lists().length %>
 
-<div class="addMember">leajflewjlk add member</div>
+
 <div class="horizontal-boards">
   <ul class="board-list-items"></ul>
   <div class="board-list-form">
